@@ -1,3 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --white: #fff;
+    --black: #101820;
+    --bg-color: #fafafa;
+
+    --max-content-width: 1020px;
+}
+
+/*value of the element's `box-sizing` property must be inherited from its parent.*/
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--black);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Raleway', sans-serif;
+}
+
+#app {
+    min-width: 320px;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
