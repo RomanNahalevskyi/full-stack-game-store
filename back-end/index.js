@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import http from 'node:http';
 import { routes } from './src/routes/index.js';
 import boom from '@hapi/boom';
+import cors from 'cors';
 
 //connect to DB
 mongoose.set('strictQuery', false);
@@ -16,6 +17,7 @@ main().catch((err) => console.error(boom.boomify(err)));
 
 //initialization app
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -9,7 +9,7 @@
     --black: #101820;
     --bg-color: #fafafa;
 
-    --max-content-width: 1020px;
+    --max-content-width: 1200px;
 }
 
 /*value of the element's `box-sizing` property must be inherited from its parent.*/
@@ -29,8 +29,8 @@ html {
 
 body {
     margin: 0;
-    height: 100vh;
-    font-family: 'Raleway', sans-serif;
+    height: 100%;
+    font-family: 'Raleway', sans-serif !important;
 }
 
 #app {
@@ -56,4 +56,11 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+.main-container {
+    width: 100%;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: 1rem;
 }

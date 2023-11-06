@@ -1,25 +1,26 @@
 {
-  "name": "game-store-back-end",
-  "version": "1.0.0",
-  "description": "game store back-end",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon index.js",
-    "format": "prettier --write src/"
-  },
-  "type": "module",
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@hapi/boom": "^10.0.1",
-    "express": "^4.18.2",
-    "express-promise-router": "^4.1.1",
-    "mongoose": "^8.0.0",
-    "nodemon": "^3.0.1",
-    "qs": "^6.11.2",
-    "ramda": "^0.29.1"
-  },
-  "devDependencies": {
-    "prettier": "^3.0.3"
-  }
+    "name": "game-store-back-end",
+    "version": "1.0.0",
+    "description": "game store back-end",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js",
+        "format": "prettier --write src/"
+    },
+    "type": "module",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@hapi/boom": "^10.0.1",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "express-promise-router": "^4.1.1",
+        "mongoose": "^8.0.0",
+        "nodemon": "^3.0.1",
+        "qs": "^6.11.2",
+        "ramda": "^0.29.1"
+    },
+    "devDependencies": {
+        "prettier": "^3.0.3"
+    }
 }
