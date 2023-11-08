@@ -21,9 +21,7 @@ const genericCrud = (model) => ({
     },
     async create({ body }, res) {
         try {
-            console.log("body", body)
             const item = new model(body);
-            console.log('item', item)
             const newItem = await item.save();
 
             return res.status(200).send(newItem);

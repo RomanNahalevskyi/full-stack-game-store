@@ -1,20 +1,23 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import TheHeader from '@/components/layout/TheHeader.vue';
-import { reactive } from 'vue';
+import { useCategoriesStore } from '@/stores/categories';
+import { useCartStore } from '@/stores/cart';
+import { onMounted } from 'vue';
 
-const categories = reactive([
-    { title: 'ps5', id: 1 },
-    { title: 'pc', id: 2 },
-    { title: 'nintendo', id: 3 }
-]);
+const getCategories = useCategoriesStore();
+const cart = useCartStore();
+
+onMounted(() => {
+    getCategories.fetchCategories();
+});
 </script>
 
 <template>
-    <TheHeader :categories="categories" />
+    <TheHeader :categories="getCategories.categories" :cart-count="cart.cartCount" />
 
-    <main>
-        <div class="main-container h-screen">
+    <main class="pt-20">
+        <div class="main-container h-full">
             <RouterView v-slot="{ Component }">
                 <KeepAlive>
                     <component :is="Component" />

@@ -6,6 +6,7 @@ const productSchema = new Schema({
     price: Number,
     amount: Number,
     imageUrl: String,
+    platform: Schema.Types.Mixed,
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'

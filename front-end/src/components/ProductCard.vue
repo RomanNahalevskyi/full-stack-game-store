@@ -1,5 +1,6 @@
 <script setup>
 import { NCard, NButton } from 'naive-ui';
+import GamePlatformIcon from '@/components/icons/GamePlatformIcon.vue';
 
 defineProps({
     title: {
@@ -17,8 +18,14 @@ defineProps({
     description: {
         type: String,
         default: ''
+    },
+    platforms: {
+        type: Array,
+        default: () => []
     }
 });
+
+defineEmits(['addToCart']);
 </script>
 
 <template>
@@ -31,10 +38,18 @@ defineProps({
             <div>
                 <p class="text-xl font-bold mb-4">{{ title }}</p>
                 <p class="mb-4">{{ description }}</p>
-                <p class="text-xl font-bold mb-4">{{ price }}$</p>
+
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-xl font-bold">{{ price }}$</p>
+                    <div class="flex gap-3">
+                        <GamePlatformIcon :platforms="platforms" />
+                    </div>
+                </div>
             </div>
 
-            <n-button strong secondary type="primary"> Add to card </n-button>
+            <n-button @click="$emit('addToCart')" strong secondary type="primary">
+                Add to card
+            </n-button>
         </div>
     </n-card>
 </template>

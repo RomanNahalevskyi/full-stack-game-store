@@ -1,12 +1,16 @@
 <script setup>
 import ProductCard from '@/components/ProductCard.vue';
 import { useProductsStore } from '@/stores/products';
-import { computed } from 'vue';
+import { useCartStore } from '@/stores/cart';
+import { computed, onMounted } from 'vue';
 import ProductCardSkeleton from '@/components/skeleton/ProductCardSkeleton.vue';
 
 const getProducts = useProductsStore();
+const cart = useCartStore();
 
-getProducts.fetchProducts();
+onMounted(() => {
+    getProducts.fetchProducts();
+});
 
 const products = computed(() => getProducts.products ?? []);
 </script>
@@ -21,12 +25,14 @@ const products = computed(() => getProducts.products ?? []);
 
         <ProductCard
             v-else
-            v-for="{ title, price, imageUrl, description, _id } in products"
-            :key="_id"
-            :title="title"
-            :price="price"
-            :description="description"
-            :image-url="imageUrl"
+            v-for="product in products"
+            :key="product._id"
+            :title="product.title"
+            :price="product.price"
+            :description="product.description"
+            :image-url="product.imageUrl"
+            :platforms="product.platform"
+            @add-to-cart="cart.addItemToCart(product)"
         />
     </section>
 </template>

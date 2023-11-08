@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
     <svg viewBox="0 0 2000 499">
         <g transform="matrix(1,0,0,1,-1.2121212121212466,-0.3722067023716136)">
