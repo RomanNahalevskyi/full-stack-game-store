@@ -13,6 +13,7 @@ onMounted(() => {
 });
 
 const products = computed(() => getProducts.products ?? []);
+const cartItemsIds = computed(() => cart.cartItems.map(({ _id }) => _id));
 </script>
 
 <template>
@@ -32,7 +33,9 @@ const products = computed(() => getProducts.products ?? []);
             :description="product.description"
             :image-url="product.imageUrl"
             :platforms="product.platform"
+            :in-cart="cartItemsIds.includes(product._id)"
             @add-to-cart="cart.addItemToCart(product)"
+            @remove-item-from-cart="cart.removeItemFromCart(product._id)"
         />
     </section>
 </template>

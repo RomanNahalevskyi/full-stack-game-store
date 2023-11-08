@@ -4,6 +4,7 @@ import TheHeader from '@/components/layout/TheHeader.vue';
 import { useCategoriesStore } from '@/stores/categories';
 import { useCartStore } from '@/stores/cart';
 import { onMounted } from 'vue';
+import { NDialogProvider } from 'naive-ui';
 
 const getCategories = useCategoriesStore();
 const cart = useCartStore();
@@ -20,7 +21,9 @@ onMounted(() => {
         <div class="main-container h-full">
             <RouterView v-slot="{ Component }">
                 <KeepAlive>
-                    <component :is="Component" />
+                    <n-dialog-provider>
+                        <component :is="Component" />
+                    </n-dialog-provider>
                 </KeepAlive>
             </RouterView>
         </div>

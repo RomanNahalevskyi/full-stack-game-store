@@ -22,10 +22,14 @@ defineProps({
     platforms: {
         type: Array,
         default: () => []
+    },
+    inCart: {
+        type: Boolean,
+        default: false
     }
 });
 
-defineEmits(['addToCart']);
+defineEmits(['addToCart', 'removeItemFromCart']);
 </script>
 
 <template>
@@ -47,7 +51,17 @@ defineEmits(['addToCart']);
                 </div>
             </div>
 
-            <n-button @click="$emit('addToCart')" strong secondary type="primary">
+            <n-button
+                v-if="inCart"
+                @click="$emit('removeItemFromCart')"
+                strong
+                secondary
+                type="error"
+            >
+                Remove from cart
+            </n-button>
+
+            <n-button v-else @click="$emit('addToCart')" strong secondary type="primary">
                 Add to card
             </n-button>
         </div>
