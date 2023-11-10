@@ -28,10 +28,7 @@ defineProps({
                 <div>
                     <ul class="flex gap-6">
                         <li v-for="{ title, id } in categories" :key="id">
-                            <RouterLink
-                                class="uppercase font-bold text-[#3d3d3d]"
-                                to="/"
-                            >
+                            <RouterLink class="uppercase font-bold text-[#3d3d3d]" to="/">
                                 {{ title }}
                             </RouterLink>
                         </li>
