@@ -1,8 +1,9 @@
 <script setup>
+import TheFooterCart from '@/components/layout/TheFooterCart.vue';
 import EmptyCartIcon from '@/components/icons/EmptyCartIcon.vue';
-import { useCartStore } from '@/stores/cart';
 import CartCard from '@/components/CartCard.vue';
 import { NButton, useDialog } from 'naive-ui';
+import { useCartStore } from '@/stores/cart';
 
 const cart = useCartStore();
 const dialog = useDialog();
@@ -22,7 +23,7 @@ const confirmDeleteAllProducts = () => {
 </script>
 
 <template>
-    <div v-if="cart.cartItems.length">
+    <div v-if="cart.cartItems.length" :class="{ 'mb-20': cart.cartItems.length }">
         <CartCard :cart-items="cart.cartItems" />
 
         <div class="flex justify-between items-center px-5 py-6">
@@ -36,6 +37,8 @@ const confirmDeleteAllProducts = () => {
             </div>
         </div>
     </div>
+
+    <TheFooterCart v-if="cart.cartItems.length" />
 
     <div v-else class="w-full flex justify-center">
         <EmptyCartIcon />

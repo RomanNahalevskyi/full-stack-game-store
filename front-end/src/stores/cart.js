@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
+import { getPaymentIntent } from '@/services/payment.service';
 
 export const useCartStore = defineStore('cart', () => {
-    let cartItems = ref([]);
+    const cartItems = ref([]);
+    const paymentIntentData = ref(null);
 
     const cartCount = computed(() => cartItems.value.length);
     const totalAmount = computed(() => {
@@ -12,6 +14,10 @@ export const useCartStore = defineStore('cart', () => {
 
         return total.toFixed(2);
     });
+
+    const handleBuy = async () => {
+        paymentIntentData.value = await getPaymentIntent({ amount: totalAmount.value });
+    };
 
     const addItemToCart = (product) => {
         cartItems.value.push(product);
@@ -31,6 +37,8 @@ export const useCartStore = defineStore('cart', () => {
         cartItems,
         totalAmount,
         removeItemFromCart,
-        removeAllItemsFromCart
+        removeAllItemsFromCart,
+        handleBuy,
+        paymentIntentData
     };
 });
