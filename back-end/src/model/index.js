@@ -1,4 +1,5 @@
 import Product from './Product.js';
 import Category from './Category.js';
+import Order from './Order.js'
 
-export { Product, Category };
+export { Product, Category, Order };

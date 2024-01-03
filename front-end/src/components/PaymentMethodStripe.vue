@@ -43,7 +43,7 @@ const handleCardChange = (event) => {
 const payWithStripe = async () => {
     const cardElement = card.value.stripeElement;
     const elemToken = await elms.value.instance.createToken(cardElement);
-    const clientSecret = cart.paymentIntentData.client_secret;
+    const clientSecret = cart.paymentIntentData.data.paymentIntent.client_secret;
     const billingDetails = {
         name: 'Test Roman'
     };

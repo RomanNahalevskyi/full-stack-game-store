@@ -3,9 +3,6 @@
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
-            <title>cart</title>
-            <desc>Created with Sketch Beta.</desc>
-            <defs></defs>
             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="Icon-Set" transform="translate(-464.000000, -724.000000)" fill="#000000">
                     <path

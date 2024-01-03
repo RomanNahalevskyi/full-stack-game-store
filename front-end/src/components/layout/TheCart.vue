@@ -1,5 +1,6 @@
 <script setup>
 import CartIcon from '@/components/icons/CartIcon.vue';
+import { NBadge, NIcon } from 'naive-ui';
 
 defineProps({
     cartCount: {
@@ -7,18 +8,16 @@ defineProps({
         default: 0
     }
 });
+
+const offset = [0, 5];
 </script>
 
 <template>
-    <RouterLink to="/cart" class="relative">
-        <div class="w-10 mr-2">
-            <CartIcon />
-        </div>
-        <span
-            class="rounded-3xl bg-[#46b29d] absolute w-6 flex justify-center text-white top-0 right-0 scale-0"
-            :class="{ 'scale-100': cartCount }"
-        >
-            {{ cartCount }}
-        </span>
+    <RouterLink to="/cart">
+        <n-badge :value="cartCount" :max="15" :offset="offset">
+            <n-icon size="35">
+                <CartIcon />
+            </n-icon>
+        </n-badge>
     </RouterLink>
 </template>

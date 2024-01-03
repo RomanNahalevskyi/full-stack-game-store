@@ -5,6 +5,7 @@ import { getPaymentIntent } from '@/services/payment.service';
 export const useCartStore = defineStore('cart', () => {
     const cartItems = ref([]);
     const paymentIntentData = ref(null);
+    const loading = ref(false);
 
     const cartCount = computed(() => cartItems.value.length);
     const totalAmount = computed(() => {
@@ -15,8 +16,25 @@ export const useCartStore = defineStore('cart', () => {
         return total.toFixed(2);
     });
 
-    const handleBuy = async () => {
-        paymentIntentData.value = await getPaymentIntent({ amount: totalAmount.value });
+    const handleBuy = async (userData) => {
+        try {
+            loading.value = true;
+
+            const formData = {
+                ...userData,
+                amount: totalAmount.value,
+                products: cartItems.value
+            };
+
+            paymentIntentData.value = await getPaymentIntent(formData);
+
+            return paymentIntentData.value;
+        } catch (err) {
+            console.error(err);
+            return paymentIntentData.value;
+        } finally {
+            loading.value = false;
+        }
     };
 
     const addItemToCart = (product) => {
@@ -39,6 +57,7 @@ export const useCartStore = defineStore('cart', () => {
         removeItemFromCart,
         removeAllItemsFromCart,
         handleBuy,
-        paymentIntentData
+        paymentIntentData,
+        loading
     };
 });

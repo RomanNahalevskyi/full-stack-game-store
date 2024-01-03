@@ -2,11 +2,17 @@
 import TheFooterCart from '@/components/layout/TheFooterCart.vue';
 import EmptyCartIcon from '@/components/icons/EmptyCartIcon.vue';
 import CartCard from '@/components/CartCard.vue';
-import { NButton, useDialog } from 'naive-ui';
+import { NButton, NModal, useDialog, useMessage } from 'naive-ui';
 import { useCartStore } from '@/stores/cart';
+import { ref } from 'vue';
+import OrderForm from '@/components/forms/OrderForm.vue';
 
 const cart = useCartStore();
 const dialog = useDialog();
+const message = useMessage();
+
+const showModal = ref(false);
+const showStripeCard = ref(false);
 
 const confirmDeleteAllProducts = () => {
     dialog.warning({
@@ -16,9 +22,25 @@ const confirmDeleteAllProducts = () => {
         negativeText: 'Cancel',
         onPositiveClick: () => {
             cart.removeAllItemsFromCart();
-        },
-        onNegativeClick: () => {}
+            message.success('Products have been removed');
+        }
     });
+};
+
+const showOrderForm = () => {
+    showModal.value = true;
+};
+
+const makeOrder = async (userData) => {
+    const result = await cart.handleBuy(userData);
+
+    if (result.status === 'OK') {
+        showModal.value = false;
+        showStripeCard.value = true;
+        message.success(result.message);
+    } else {
+        message.error(result.message);
+    }
 };
 </script>
 
@@ -38,9 +60,26 @@ const confirmDeleteAllProducts = () => {
         </div>
     </div>
 
-    <TheFooterCart v-if="cart.cartItems.length" />
+    <TheFooterCart
+        v-if="cart.cartItems.length"
+        @show-order-form="showOrderForm"
+        :show-stripe-card="showStripeCard"
+    />
 
     <div v-else class="w-full flex justify-center">
         <EmptyCartIcon />
     </div>
+
+    <n-modal
+        v-model:show="showModal"
+        preset="card"
+        style="width: 600px"
+        title="Customer Information"
+        :bordered="true"
+        size="large"
+    >
+        <div class="w-full">
+            <OrderForm @make-order="makeOrder" :loading="cart.loading" />
+        </div>
+    </n-modal>
 </template>

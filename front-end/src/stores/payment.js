@@ -31,7 +31,7 @@ export const usePaymentStore = defineStore('payment', () => {
                 }
             });
 
-            if (result) {
+            if (result.paymentIntent.status === 'succeeded') {
                 cart.removeAllItemsFromCart();
             }
         } catch (err) {

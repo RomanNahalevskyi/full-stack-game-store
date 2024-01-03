@@ -1,16 +1,14 @@
 <script setup>
 import PaymentMethodStripe from '@/components/PaymentMethodStripe.vue';
-import { useCartStore } from '@/stores/cart';
 import { NButton } from 'naive-ui';
-import { ref } from 'vue';
 
-const showStripeCard = ref(false);
-const cart = useCartStore();
-
-const makeOrder = () => {
-    cart.handleBuy();
-    showStripeCard.value = true;
-};
+defineEmits(['showOrderForm']);
+defineProps({
+    showStripeCard: {
+        type: Boolean,
+        default: false
+    }
+});
 </script>
 
 <template>
@@ -25,7 +23,7 @@ const makeOrder = () => {
             <div v-else class="flex justify-between">
                 <p class="text-xl font-bold">Make an order</p>
 
-                <n-button @click="makeOrder" class="w-full min-w-[30%]" type="success">
+                <n-button @click="$emit('showOrderForm')" class="w-full min-w-[30%]" type="success">
                     Order
                 </n-button>
             </div>
